@@ -31,9 +31,9 @@ func indexViewHandler(c echo.Context) error {
 
 	// Define template layout for index page.
 	indexTemplate := templates.Layout(
-		"Welcome to example!", // define title text
-		metaTags,              // define meta tags
-		bodyContent,           // define body content
+		"Welcome to example2!", // define title text
+		metaTags,               // define meta tags
+		bodyContent,            // define body content
 	)
 
 	return htmx.NewResponse().RenderTempl(c.Request().Context(), c.Response().Writer, indexTemplate)
