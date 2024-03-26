@@ -1,0 +1,30 @@
+package pages
+
+import "github.com/Saakhr/go-affichage-de-notes/models"
+import "github.com/Saakhr/go-affichage-de-notes/templates/pages/comps"
+
+templ Mng_grp(users []models.Groupwithspecialite,specs []models.Specialite) {
+	<div id="app">
+		<h1 class="text-3xl font-bold mb-4">
+			Manage Groupe:
+		</h1>
+		<div>
+			<div class="overflow-y-auto">
+				<table class="table w-full">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Group</th>
+							<th>Specialite</th>
+						</tr>
+					</thead>
+					<tbody>
+						for i,v:=range users {
+							@comps.Item_grp(i, v, &specs)
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+}

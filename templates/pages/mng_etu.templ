@@ -1,0 +1,31 @@
+package pages
+
+import "github.com/Saakhr/go-affichage-de-notes/models"
+import "github.com/Saakhr/go-affichage-de-notes/templates/pages/comps"
+
+templ Mng_etu(users []models.UserSpecialite,specs []models.Specialite) {
+	<div id="app">
+		<h1 class="text-3xl font-bold mb-4">
+			Manage Etudiant:
+		</h1>
+		<div>
+			<div class="overflow-y-auto">
+				<table class="table w-full">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Name</th>
+							<th>Group</th>
+							<th>Specialite</th>
+						</tr>
+					</thead>
+					<tbody>
+						for i,v:=range users {
+							@comps.Item_etu(i, v, &specs)
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+}

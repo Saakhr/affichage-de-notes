@@ -1,0 +1,1 @@
+docker run --name mysql-container -e user=password -v /path/on/host:/var/lib/mysql -d mysql

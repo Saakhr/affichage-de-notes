@@ -1,0 +1,36 @@
+package pages
+
+import "github.com/Saakhr/go-affichage-de-notes/models"
+import "fmt"
+
+templ Add_group(specs []models.Specialite) {
+	<div id="app" class="h-screen flex flex-col items-center justify-center">
+		<h1 class="text-3xl font-bold mb-4">
+			Ajouter un Groupe:
+		</h1>
+		<div>
+			<form
+				class="text-white flex flex-col gap-4"
+				hx-post="/api/add_grp"
+				hx-swap="outerHTML"
+				hx-target="#app"
+			>
+				<label class="input input-bordered flex items-center gap-2">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 opacity-70">
+						<path
+							d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z"
+						></path>
+					</svg>
+					<input type="text" class="grow" placeholder="Name" name="name"/>
+				</label>
+				<label class="text-black">Specialites:</label>
+				<select class="select select-bordered w-full max-w-xs" name="spec">
+					for _,v:=range specs {
+						<option value={fmt.Sprintf("%v",v.ID)} >{ v.Name }</option>
+					}
+				</select>
+				<button type="submit" class="btn w-full">Ajouter</button>
+			</form>
+		</div>
+	</div>
+}

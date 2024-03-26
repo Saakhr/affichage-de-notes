@@ -1,0 +1,43 @@
+package pages
+
+import "github.com/Saakhr/go-affichage-de-notes/models"
+import "github.com/Saakhr/go-affichage-de-notes/templates/pages/comps"
+
+templ Mng_prof(profh []models.Prof,modules []models.Group,profn []models.Profe) {
+	<div id="app">
+		<h1 class="text-3xl font-bold mb-4">
+			Manage Prof:
+		</h1>
+		<div>
+			<div class="overflow-y-auto">
+				<table class="table w-full">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Specialite</th>
+							<th>Modules</th>
+						</tr>
+					</thead>
+					<tbody>
+						for i,v:=range profn {
+							if b,int:=checkprof(&profh,&v);b {
+								@comps.Item_prof(i, profh[int], &modules)
+							} else {
+								@comps.Item_prof_No(i, v, &modules)
+							}
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+}
+
+func checkprof(user *[]models.Prof, specs *models.Profe) (bool, int) {
+	for i, v := range *user {
+		if v.ID == *&specs.ID {
+			return true, i
+		}
+	}
+	return false, -1
+}

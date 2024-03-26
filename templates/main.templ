@@ -1,7 +1,5 @@
 package templates
 
-import "github.com/Saakhr/go-affichage-de-notes/templates/pages"
-
 templ Layout(title string, metaTags, bodyContent templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en">
@@ -25,7 +23,7 @@ templ Layout(title string, metaTags, bodyContent templ.Component) {
 			<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"/>
 			<link href="/static/styles.css" rel="stylesheet"/>
 		</head>
-		<body onload={ pages.BodyScripts() }>
+		<body class="h-screen" hx-swap-oob="outerHTML:body">
 			@bodyContent
 			<script src="/static/scripts.js"></script>
 		</body>

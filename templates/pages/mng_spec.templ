@@ -1,0 +1,42 @@
+package pages
+
+import "github.com/Saakhr/go-affichage-de-notes/models"
+import "github.com/Saakhr/go-affichage-de-notes/templates/pages/comps"
+
+templ Mng_spec(users []models.SpecialiteWithModules,modules []models.Modules,specs []models.Specialite) {
+	<div id="app">
+		<h1 class="text-3xl font-bold mb-4">
+			Manage Specialites:
+		</h1>
+		<div>
+			<div class="overflow-y-auto">
+				<table class="table w-full">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Specialite</th>
+							<th>Modules</th>
+						</tr>
+					</thead>
+					<tbody>
+						for i,v:=range specs {
+            if b,int:=checkspec(&users,&v);b{
+            @comps.Item_spec(i,users[int],&modules)
+            }else{
+@comps.Item_spec_no(i,v,&modules)
+            }
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+}
+func checkspec(user *[]models.SpecialiteWithModules,specs *models.Specialite) (bool,int){
+  for i,v:=range *user{
+  if v.ID==*&specs.ID{
+  return true,i
+  }
+  }
+  return false,-1
+}

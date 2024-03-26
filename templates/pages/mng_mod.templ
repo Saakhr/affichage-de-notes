@@ -1,0 +1,29 @@
+package pages
+
+import "github.com/Saakhr/go-affichage-de-notes/models"
+import "github.com/Saakhr/go-affichage-de-notes/templates/pages/comps"
+
+templ Mng_mod(specs []models.Modules) {
+	<div id="app">
+		<h1 class="text-3xl font-bold mb-4">
+			Manage Modules:
+		</h1>
+		<div>
+			<div class="overflow-y-auto">
+				<table class="table w-full">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Module</th>
+						</tr>
+					</thead>
+					<tbody>
+						for i,v:=range specs {
+							@comps.Item_mod(i, v)
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+}
