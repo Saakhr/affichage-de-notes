@@ -96,14 +96,17 @@ func setupDB() *sql.DB {
 
 	// Create Grade table
 	ExecSQL(db, `
-        CREATE TABLE IF NOT EXISTS Grade (
-            GradeID INT AUTO_INCREMENT PRIMARY KEY,
-            CourseID INT,
-            UserID INT,
-            GradeValue DECIMAL(5, 2),
-            FOREIGN KEY (CourseID) REFERENCES Course(CourseID),
-            FOREIGN KEY (UserID) REFERENCES Users(UserID)
-        );
+CREATE TABLE IF NOT EXISTS Grade (
+    GradeID INT AUTO_INCREMENT PRIMARY KEY,
+    CourseID INT,
+    UserID INT,
+    Exam DECIMAL(5, 2),
+    TD DECIMAL(5, 2),
+    TP DECIMAL(5, 2),
+    Projet DECIMAL(5, 2),
+    FOREIGN KEY (CourseID) REFERENCES Course(CourseID),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
     `)
 	//admin
 	db.Exec(`

@@ -58,3 +58,21 @@ type ProfDB struct {
 	Group  Specialite
 	Module Modules
 }
+type StudentGroupCourse struct {
+	UserID      int
+	StudentName string
+	GroupName   string
+	CourseID    int
+	CourseName  string
+}
+
+type GradeInfo struct {
+	StudentName    string
+	CourseName     string
+	GroupName      string
+	SpecialiteName string
+	Exam           float64
+	TD             float64
+	TP             float64
+	Projet         float64
+}

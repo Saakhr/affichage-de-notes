@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/Saakhr/go-affichage-de-notes/models"
 	"github.com/Saakhr/go-affichage-de-notes/templates"
 	"github.com/Saakhr/go-affichage-de-notes/templates/pages"
 	"github.com/a-h/templ"
@@ -84,9 +83,9 @@ func (api *ApiConf) middlewareAdminPer(handler authHandler) echo.HandlerFunc {
 			)
 			var indexTemplate templ.Component
 			indexTemplate = templates.Layout(
-				"Affichage de Notes", // define title text
-				metaTags,             // define meta tags
-				pages.Dashboard(user.role, []models.Specialite{}), // define body content
+				"Affichage de Notes",       // define title text
+				metaTags,                   // define meta tags
+				pages.Dashboard(user.role), // define body content
 			)
 			return htmx.NewResponse().RenderTempl(c.Request().Context(), c.Response().Writer, indexTemplate)
 

@@ -62,6 +62,9 @@ func runServer(apiCFG ApiConf) error {
 	echo.GET("/api/mng_mod", apiCFG.middlewareAdminPer(apiCFG.mng_mod_page))
 	echo.PUT("/api/mng_mod", apiCFG.middlewareAdminPer(apiCFG.edit_mod))
 	echo.DELETE("/api/mng_mod", apiCFG.middlewareAdminPer(apiCFG.delete_mod))
+	///
+	echo.GET("/api/add_notes", apiCFG.middlewareAuth(apiCFG.add_note_page))
+	echo.POST("/api/add_notes", apiCFG.middlewareAuth(apiCFG.add_note))
 
 	// Create a new server instance with options from environment variables.
 	// For more information, see https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/

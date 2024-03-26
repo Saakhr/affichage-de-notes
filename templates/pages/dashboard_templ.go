@@ -10,9 +10,7 @@ import "context"
 import "io"
 import "bytes"
 
-import "github.com/Saakhr/go-affichage-de-notes/models"
-
-func Dashboard(role string, specs []models.Specialite) templ.Component {
+func Dashboard(role string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -30,17 +28,28 @@ func Dashboard(role string, specs []models.Specialite) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if role == "admin" {
-			templ_7745c5c3_Err = Add_etu(specs).Render(ctx, templ_7745c5c3_Buffer)
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"app\"></div>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		} else if role == "prof" {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"app\"></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<label for=\"my-drawer-2\" class=\"btn btn-primary drawer-button lg:hidden\">Open drawer</label></div><div class=\"drawer-side\"><label for=\"my-drawer-2\" aria-label=\"close sidebar\" class=\"drawer-overlay\"></label><ul class=\"menu p-4 w-80 min-h-full bg-base-200 text-base-content\"><!-- Sidebar content here -->")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<label for=\"my-drawer-2\" class=\"btn btn-primary drawer-button lg:hidden\">Open drawer</label></div><div class=\"drawer-side\"><label for=\"my-drawer-2\" aria-label=\"close sidebar\" class=\"drawer-overlay\"></label><ul class=\"menu p-4 w-80 min-h-full bg-base-200 text-base-content overflow-auto\"><!-- Sidebar content here -->")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		if role == "admin" {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li hx-get=\"/api/add_etu\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Un Etudient</a></li><li hx-get=\"/api/mng_etu\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Etudient</a></li><li hx-get=\"/api/add_grp\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Un Groupe</a></li><li hx-get=\"/api/mng_grp\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Groupes</a></li><li hx-get=\"/api/add_pro\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Un Professeure</a></li><li hx-get=\"/api/mng_pro\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Professeures</a></li><li hx-get=\"/api/add_mod\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Un Module</a></li><li hx-get=\"/api/mng_mod\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Modules</a></li><li hx-get=\"/api/add_spec\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Une Specialite</a></li><li hx-get=\"/api/mng_spec\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Specialites</a></li>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li hx-get=\"/api/add_etu\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Un Etudient</a></li><li hx-get=\"/api/mng_etu\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Etudient</a></li><li hx-get=\"/api/add_grp\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Un Groupe</a></li><li hx-get=\"/api/mng_grp\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Groupes</a></li><li hx-get=\"/api/add_pro\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Un Professeure</a></li><li hx-get=\"/api/mng_pro\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Professeures</a></li><li hx-get=\"/api/add_mod\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Un Module</a></li><li hx-get=\"/api/mng_mod\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Modules</a></li><li hx-get=\"/api/add_spec\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Une Specialite</a></li><li hx-get=\"/api/mng_spec\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Specialites</a></li><div class=\"divider\"></div>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		if role == "admin" || role == "prof" {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li hx-get=\"/api/add_notes\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Des Notes</a></li><li hx-get=\"/api/mng_notes\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Notes</a></li><div class=\"divider\"></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
