@@ -93,3 +93,48 @@ func (api *ApiConf) middlewareAdminPer(handler authHandler) echo.HandlerFunc {
 		return handler(c, user)
 	}
 }
+func (api *ApiConf) middlewareProfPer(handler authHandler) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		sess, _ := session.Get("session", c)
+		userid := sess.Values["userid"]
+		query := `
+		SELECT UserID, Username, Session, Role	FROM Users WHERE UserID = ?;
+	`
+		var user User
+		_ = api.db.QueryRow(query, userid).Scan(&user.id, &user.username, &user.session, &user.role)
+		if sess.Values["session"] != user.session {
+			c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTML)
+
+			metaTags := pages.MetaTags(
+				"Affichage de Notes", // define meta description
+				"Affichage de Notes", // define meta description
+			)
+			var indexTemplate templ.Component
+			indexTemplate = templates.Layout(
+				"Affichage de Notes",     // define title text
+				metaTags,                 // define meta tags
+				pages.BodyContent(false), // define body content
+			)
+			return htmx.NewResponse().RenderTempl(c.Request().Context(), c.Response().Writer, indexTemplate)
+
+		}
+
+		if user.role != "prof" {
+			c.Response().Header().Set(echo.HeaderContentType, echo.MIMETextHTML)
+
+			metaTags := pages.MetaTags(
+				"Affichage de Notes", // define meta description
+				"Affichage de Notes", // define meta description
+			)
+			var indexTemplate templ.Component
+			indexTemplate = templates.Layout(
+				"Affichage de Notes",       // define title text
+				metaTags,                   // define meta tags
+				pages.Dashboard(user.role), // define body content
+			)
+			return htmx.NewResponse().RenderTempl(c.Request().Context(), c.Response().Writer, indexTemplate)
+
+		}
+		return handler(c, user)
+	}
+}

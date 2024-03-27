@@ -1,0 +1,37 @@
+package pages
+
+import "github.com/Saakhr/go-affichage-de-notes/models"
+import "github.com/Saakhr/go-affichage-de-notes/templates/pages/comps"
+
+templ Mng_notes(notes []models.GradeInfo) {
+	<div id="app">
+		<h1 class="text-3xl font-bold mb-4">
+			Les Notes:
+		</h1>
+		<div>
+			<div class="overflow-y-auto">
+				<table class="table w-full">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Group</th>
+							<th>Module</th>
+							<th>Name</th>
+							<th>Specialite</th>
+							<th>TD</th>
+							<th>TP</th>
+							<th>PROJET</th>
+							<th>EXAM</th>
+							<th>Moyenne</th>
+						</tr>
+					</thead>
+					<tbody>
+						for i,v:=range notes {
+							@comps.Item_note(i, v)
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+}

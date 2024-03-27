@@ -1,0 +1,33 @@
+package comps
+
+import "fmt"
+import "github.com/Saakhr/go-affichage-de-notes/models"
+
+templ Item_note_see(i int,v models.GradeInfoStudent) {
+	<tr class="hover:bg-gray-200" id={ "item_" + fmt.Sprintf("%v", i) }>
+		<th>{ fmt.Sprintf("%v",i+1) }</th>
+		<td>{ v.CourseName }</td>
+		if v.TD>=0 {
+			<td>{ fmt.Sprintf("%v",v.TD) }</td>
+		} else {
+			<td></td>
+		}
+		if v.TP>=0 {
+			<td>{ fmt.Sprintf("%v",v.TP) }</td>
+		} else {
+			<td></td>
+		}
+		if v.Projet>=0 {
+			<td>{ fmt.Sprintf("%v",v.Projet) }</td>
+		} else {
+			<td></td>
+		}
+		if v.Exam>=0 {
+			<td>{ fmt.Sprintf("%v",v.Exam*2) }</td>
+		} else {
+			<td></td>
+		}
+		<td>{ v.TeacherName }</td>
+		<td>{ fmt.Sprintf("%.2f",v.Moyenne) }</td>
+	</tr>
+}

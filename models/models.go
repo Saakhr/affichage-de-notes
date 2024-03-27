@@ -67,6 +67,7 @@ type StudentGroupCourse struct {
 }
 
 type GradeInfo struct {
+	GradeID        int
 	StudentName    string
 	CourseName     string
 	GroupName      string
@@ -75,4 +76,19 @@ type GradeInfo struct {
 	TD             float64
 	TP             float64
 	Projet         float64
+	Moyenne        float64
+}
+
+type GradeInfoStudent struct {
+	GradeID        int
+	StudentName    string
+	TeacherName    string
+	GroupName      string
+	SpecialiteName string
+	CourseName     string
+	Exam           float64
+	TD             float64
+	TP             float64
+	Projet         float64
+	Moyenne        float64
 }

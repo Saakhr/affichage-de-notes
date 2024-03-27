@@ -37,6 +37,8 @@ func runServer(apiCFG ApiConf) error {
 
 	// Handle API endpoints.
 	echo.POST("/api/login", apiCFG.LoginApiHandler)
+	echo.GET("/api/logout", apiCFG.middlewareAuth(apiCFG.Logout))
+	//admin
 	echo.GET("/api/add_etu", apiCFG.middlewareAdminPer(apiCFG.add_etu_page))
 	echo.POST("/api/add_etu", apiCFG.middlewareAdminPer(apiCFG.add_etu))
 	echo.GET("/api/mng_etu", apiCFG.middlewareAdminPer(apiCFG.mng_etu_page))
@@ -62,9 +64,14 @@ func runServer(apiCFG ApiConf) error {
 	echo.GET("/api/mng_mod", apiCFG.middlewareAdminPer(apiCFG.mng_mod_page))
 	echo.PUT("/api/mng_mod", apiCFG.middlewareAdminPer(apiCFG.edit_mod))
 	echo.DELETE("/api/mng_mod", apiCFG.middlewareAdminPer(apiCFG.delete_mod))
-	///
-	echo.GET("/api/add_notes", apiCFG.middlewareAuth(apiCFG.add_note_page))
-	echo.POST("/api/add_notes", apiCFG.middlewareAuth(apiCFG.add_note))
+	///prof
+	echo.GET("/api/add_notes", apiCFG.middlewareProfPer(apiCFG.add_note_page))
+	echo.POST("/api/add_notes", apiCFG.middlewareProfPer(apiCFG.add_note))
+	echo.GET("/api/mng_notes", apiCFG.middlewareProfPer(apiCFG.mng_note_page))
+	echo.PUT("/api/mng_notes", apiCFG.middlewareProfPer(apiCFG.mng_note))
+	echo.DELETE("/api/mng_notes", apiCFG.middlewareProfPer(apiCFG.delete_note))
+	///student
+	echo.GET("/api/show_notes", apiCFG.middlewareAuth(apiCFG.SeeNotes))
 
 	// Create a new server instance with options from environment variables.
 	// For more information, see https://blog.cloudflare.com/the-complete-guide-to-golang-net-http-timeouts/

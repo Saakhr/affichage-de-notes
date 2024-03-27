@@ -23,22 +23,7 @@ func Dashboard(role string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"drawer lg:drawer-open\"><input id=\"my-drawer-2\" type=\"checkbox\" class=\"drawer-toggle\"><div class=\"drawer-content\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		if role == "admin" {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"app\"></div>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-		} else if role == "prof" {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div id=\"app\"></div>")
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<label for=\"my-drawer-2\" class=\"btn btn-primary drawer-button lg:hidden\">Open drawer</label></div><div class=\"drawer-side\"><label for=\"my-drawer-2\" aria-label=\"close sidebar\" class=\"drawer-overlay\"></label><ul class=\"menu p-4 w-80 min-h-full bg-base-200 text-base-content overflow-auto\"><!-- Sidebar content here -->")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"drawer lg:drawer-open\"><input id=\"my-drawer-2\" type=\"checkbox\" class=\"drawer-toggle\"><div class=\"drawer-content\"><div id=\"app\"><h1 class=\"text-3xl font-bold\">Welcome!</h1></div><label for=\"my-drawer-2\" class=\"btn btn-primary drawer-button lg:hidden\">Open drawer</label></div><div class=\"drawer-side\"><label for=\"my-drawer-2\" aria-label=\"close sidebar\" class=\"drawer-overlay\"></label><ul class=\"menu p-4 w-80 min-h-full bg-base-200 text-base-content overflow-auto\"><!-- Sidebar content here -->")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -48,13 +33,19 @@ func Dashboard(role string) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		if role == "admin" || role == "prof" {
+		if role == "prof" {
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li hx-get=\"/api/add_notes\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Ajouter Des Notes</a></li><li hx-get=\"/api/mng_notes\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Modifier Les Notes</a></li><div class=\"divider\"></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</ul></div></div>")
+		if role == "student" {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li hx-get=\"/api/show_notes\" hx-swap=\"outerHTML\" hx-target=\"#app\"><a>Afficher Les Notes</a></li>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li hx-get=\"/api/logout\" hx-swap=\"outerHTML\" hx-target=\"body\"><a>Logout</a></li></ul></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

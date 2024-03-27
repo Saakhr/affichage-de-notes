@@ -100,10 +100,12 @@ CREATE TABLE IF NOT EXISTS Grade (
     GradeID INT AUTO_INCREMENT PRIMARY KEY,
     CourseID INT,
     UserID INT,
+            TeacherID INT,
     Exam DECIMAL(5, 2),
     TD DECIMAL(5, 2),
     TP DECIMAL(5, 2),
     Projet DECIMAL(5, 2),
+            FOREIGN KEY (TeacherID) REFERENCES Users(UserID),
     FOREIGN KEY (CourseID) REFERENCES Course(CourseID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );

@@ -4,11 +4,9 @@ templ Dashboard(role string) {
 	<div class="drawer lg:drawer-open">
 		<input id="my-drawer-2" type="checkbox" class="drawer-toggle"/>
 		<div class="drawer-content">
-			if role=="admin" {
-				<div id="app"></div>
-			} else if role=="prof" {
-				<div id="app"></div>
-			}
+			<div id="app">
+				<h1 class="text-3xl font-bold">Welcome!</h1>
+			</div>
 			<label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
 		</div>
 		<div class="drawer-side">
@@ -28,11 +26,15 @@ templ Dashboard(role string) {
 					<li hx-get="/api/mng_spec" hx-swap="outerHTML" hx-target="#app"><a>Modifier Les Specialites</a></li>
 					<div class="divider"></div>
 				}
-				if role=="admin" || role=="prof" {
+				if role=="prof" {
 					<li hx-get="/api/add_notes" hx-swap="outerHTML" hx-target="#app"><a>Ajouter Des Notes</a></li>
 					<li hx-get="/api/mng_notes" hx-swap="outerHTML" hx-target="#app"><a>Modifier Les Notes</a></li>
 					<div class="divider"></div>
 				}
+				if role=="student" {
+					<li hx-get="/api/show_notes" hx-swap="outerHTML" hx-target="#app"><a>Afficher Les Notes</a></li>
+				}
+				<li hx-get="/api/logout" hx-swap="outerHTML" hx-target="body"><a>Logout</a></li>
 			</ul>
 		</div>
 	</div>
