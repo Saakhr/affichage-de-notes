@@ -39,7 +39,7 @@ func (api *ApiConf) middlewareAuth(handler authHandler) echo.HandlerFunc {
 				metaTags,                 // define meta tags
 				pages.BodyContent(false), // define body content
 			)
-			return htmx.NewResponse().RenderTempl(c.Request().Context(), c.Response().Writer, indexTemplate)
+			return htmx.NewResponse().Retarget("body").RenderTempl(c.Request().Context(), c.Response().Writer, indexTemplate)
 
 		}
 		return handler(c, user)
@@ -70,7 +70,7 @@ func (api *ApiConf) middlewareAdminPer(handler authHandler) echo.HandlerFunc {
 				metaTags,                 // define meta tags
 				pages.BodyContent(false), // define body content
 			)
-			return htmx.NewResponse().RenderTempl(c.Request().Context(), c.Response().Writer, indexTemplate)
+			return htmx.NewResponse().Retarget("body").RenderTempl(c.Request().Context(), c.Response().Writer, indexTemplate)
 
 		}
 
@@ -115,7 +115,7 @@ func (api *ApiConf) middlewareProfPer(handler authHandler) echo.HandlerFunc {
 				metaTags,                 // define meta tags
 				pages.BodyContent(false), // define body content
 			)
-			return htmx.NewResponse().RenderTempl(c.Request().Context(), c.Response().Writer, indexTemplate)
+			return htmx.NewResponse().Retarget("body").RenderTempl(c.Request().Context(), c.Response().Writer, indexTemplate)
 
 		}
 
